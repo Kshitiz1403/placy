@@ -225,6 +225,8 @@ class AuthController:
 
         # Only empty password needed
         auth.password = ""
+        auth.role = str(foundUser.role)
+        auth.userId = str(foundUser.id)
 
         return AuthResponse(
             status=HTTPStatus.OK,
