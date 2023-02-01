@@ -192,10 +192,11 @@ class AuthController:
         #     token=None,
         #     refresh=None,
         # )
-        response = self.login(auth)
-        if isinstance(response, AuthResponse):
-            response.payload.password = ""
-        return response
+        # response = self.login(auth)
+        # if isinstance(response, AuthResponse):
+        #     response.payload.password = ""
+        # return response
+        return self.login(auth)
 
     def login(self, auth: Auth) -> AuthResponse | ErrorResponse:
         """Route to handle user signin."""
@@ -221,6 +222,9 @@ class AuthController:
                 success=False,
                 errmsg="Can't generate token. SECRET_KEY empty.",
             )
+
+        # Only empty password needed
+        auth.password = ""
 
         return AuthResponse(
             status=HTTPStatus.OK,

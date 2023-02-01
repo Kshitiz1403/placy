@@ -14,7 +14,7 @@ def setupAuthRoutes(app: FastAPI, controller: AuthController) -> None:
         "/auth/signup",
         response_model=AuthResponse | ErrorResponse,
         response_model_exclude_none=True,
-        response_description="Allowr user signup.",
+        response_description="Allow user signup.",
     )
     def signup(auth: Auth, temp: Response):
         response = controller.signup(auth)

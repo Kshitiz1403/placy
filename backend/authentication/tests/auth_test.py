@@ -65,7 +65,7 @@ client = TestClient(app)
 def assertSignUp(user: dict[str, str]):
     """Assert signup is working and possible."""
     response = client.post("/auth/signup", json=user)
-    assert response.status_code == 201, "Status code not 200."
+    assert response.status_code == 200, "Status code not 200."
     assert response.json()["success"], response.json()
 
 

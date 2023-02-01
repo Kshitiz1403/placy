@@ -21,3 +21,4 @@ class Auth(BaseModel):
     username: str
     email: EmailStr
     password: str
+    id: str | None
