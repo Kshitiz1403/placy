@@ -182,15 +182,20 @@ class AuthController:
                 success=False,
                 errmsg=db_response.errmsg,
             )
+        # auth.password = ""
 
-        return AuthResponse(
-            status=db_response.status,
-            success=True,
-            error=None,
-            payload=auth,
-            token=None,
-            refresh=None,
-        )
+        # return AuthResponse(
+        #     status=db_response.status,
+        #     success=True,
+        #     error=None,
+        #     payload=auth,
+        #     token=None,
+        #     refresh=None,
+        # )
+        response = self.login(auth)
+        if isinstance(response, AuthResponse):
+            response.payload.password = ""
+        return response
 
     def login(self, auth: Auth) -> AuthResponse | ErrorResponse:
         """Route to handle user signin."""
