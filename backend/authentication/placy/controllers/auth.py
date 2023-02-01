@@ -214,6 +214,8 @@ class AuthController:
                 status=400, errmsg="email/password wrong", success=False
             )
 
+        auth.role = str(foundUser.role)
+        auth.userId = str(foundUser.id)
         (token, refresh) = self.generate_token(auth.dict(exclude={"password"}))
 
         if token == "":
@@ -225,8 +227,6 @@ class AuthController:
 
         # Only empty password needed
         auth.password = ""
-        auth.role = str(foundUser.role)
-        auth.userId = str(foundUser.id)
 
         return AuthResponse(
             status=HTTPStatus.OK,
