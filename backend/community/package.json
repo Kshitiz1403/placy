@@ -15,12 +15,14 @@
     "lint:fix": "npm run lint:js -- --fix"
   },
   "dependencies": {
+    "@azure/communication-email": "^1.0.0-beta.1",
     "@azure/storage-blob": "^12.12.0",
     "argon2": "^0.27.0",
     "axios": "^1.2.1",
     "body-parser": "^1.19.0",
     "celebrate": "^13.0.3",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
