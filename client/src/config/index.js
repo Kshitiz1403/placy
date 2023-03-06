@@ -1,3 +1,3 @@
 export default {
-    baseUrl: "http://localhost:4000/api",
+    baseUrl: "http://epics.kshitizagrawal.in/api",
 }

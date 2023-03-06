@@ -20,6 +20,7 @@ import Announcements from "../screens/Announcements"
 import Settings from "../screens/Settings"
 import Post from "../screens/Post";
 import ReactToPost from "../screens/ReactToPost";
+import CreatePostHome from "../screens/CreatePostHome";
 
 
 const Routes = () => {
@@ -52,12 +53,18 @@ const Routes = () => {
             <AppStack.Screen name="Home" component={HomeTabs} options={{ headerShown: false }} />
             <AppStack.Screen name="Post" component={Post} options={{ headerShown: false, }} />
             <AppStack.Screen name="ReactToPost" component={ReactToPost} options={({ route }) => ({ title: route.params.title })} />
+            <AppStack.Screen name="CreatePost" component={CreatePostHome} initialParams={{ isHome: true, communityName: 'Home' }} options={{ headerShown: false }} />
         </AppStack.Navigator>
     )
 
     const HomeMobileStack = () => {
         return <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
-            <Drawer.Screen name="Discover" component={Discover} />
+            <Drawer.Screen name="Discover" component={Discover}
+                options={({ route, navigation }) => ({
+                    headerRight: () => (
+                        <Ionicons name="create-outline" size={30} style={{ marginRight: 20 }} onPress={() => navigation.navigate('CreatePost')} />
+                    )
+                })} />
             <Drawer.Screen name="Community" component={Community} />
         </Drawer.Navigator>
     }

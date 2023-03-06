@@ -3,7 +3,10 @@ import cors from 'cors';
 import routes from '@/api';
 import config from '@/config';
 import { Result } from '@/api/util/result';
+import Container from 'typedi';
+import { Logger } from 'winston';
 export default ({ app }: { app: express.Application }) => {
+  const logger: Logger = Container.get('logger');
   /**
    * Health Check endpoints
    * @TODO Explain why they are here
@@ -44,14 +47,25 @@ export default ({ app }: { app: express.Application }) => {
   /// error handlers
   app.use((err, req, res, next) => {
     /**
-     * Handle 401 thrown by jwt library
+     * Handles authorization errors
      */
-    if (err.name === 'UnauthorizedError') {
-      return res.status(err.status).send({ message: err.message }).end();
+    if (err.status === 401) {
+      logger.warn('⚠️ warn: %o', err);
+      res.status(err.status);
+      return res.json(Result.error(err)).end();
+    }
+
+    /**
+     * Handles multer errors
+     */
+    if (err.code == 'LIMIT_UNEXPECTED_FILE') {
+      res.status(413);
+      return res.json(Result.error('Exceeded the expected file limit'));
     }
     return next(err);
   });
   app.use((err, req, res, next) => {
+    logger.error('🔥 error: %o', err);
     res.status(err.status || 500);
     res.json(Result.error(err));
   });

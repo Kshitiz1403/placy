@@ -18,6 +18,9 @@ const config = {
         Settings: {
             path: "settings"
         },
+        CreatePost: {
+            path: "create"
+        },
         Post: {
             path: "post/:id"
         },
