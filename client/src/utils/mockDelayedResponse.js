@@ -1,4 +1,4 @@
-const mockDelayedResponse = (cb = () => { }, timeout) => {
+const mockDelayedResponse = (cb, timeout) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             return resolve(cb)

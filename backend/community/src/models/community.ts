@@ -6,16 +6,10 @@ const Community = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      index: true,
     },
     totalMembers: {
       type: Number,
       default: 1,
-    },
-    imageURI: String,
-    description: {
-      type: String,
-      required: true,
     },
     isClosed: {
       type: Boolean,

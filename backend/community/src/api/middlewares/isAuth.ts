@@ -16,7 +16,7 @@ const getTokenFromHeader = (req): string => {
 };
 
 export const checkToken = (token: string, isAuth = true): IToken => {
-  const logger: Logger = Container.get('logger');
+  const Logger: Logger = Container.get('logger');
   if (!token && isAuth)
     throw { status: 401, message: 'This is an authenticated resource, you must be logged in to access it.' };
   try {
@@ -27,38 +27,25 @@ export const checkToken = (token: string, isAuth = true): IToken => {
       /** @TODO here, we reissue the token using the refresh token from the database  */
     }
 
-    logger.error('🔥 Error in verifying token: %o', err);
+    Logger.error('🔥 Error in verifying token: %o', err);
     throw err;
   }
 };
 
-const baseAuth = async (req: IRequest, res: IResponse, next: INextFunction, type: IToken['role']) => {
-  const logger: Logger = Container.get('logger');
+const isAuth = async (req: IRequest, res: IResponse, next: INextFunction) => {
+  const Logger: Logger = Container.get('logger');
 
   try {
     const tokenFromHeader = getTokenFromHeader(req);
     const token = checkToken(tokenFromHeader);
-    if (!(token.role == 'admin' || token.role == type))
-      return next('This is an authenticated resource, you must be logged in to access it.');
-    logger.debug('User authenticated %o', token);
+    Logger.debug('User authenticated %o', token);
 
     req.currentUser = token;
     return next();
   } catch (e) {
+    Logger.error('🔥 Error attaching user to req: %o', e);
     return next(e);
   }
-};
-
-const isAuth = async (req: IRequest, res: IResponse, next: INextFunction) => {
-  return baseAuth(req, res, next, 'user');
-};
-
-export const isOfficerAuth = async (req: IRequest, res: IResponse, next: INextFunction) => {
-  return baseAuth(req, res, next, 'officer');
-};
-
-export const isAdminAuth = async (req: IRequest, res: IResponse, next: INextFunction) => {
-  return baseAuth(req, res, next, 'admin');
 };
 
 export default isAuth;

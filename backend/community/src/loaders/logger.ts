@@ -13,7 +13,6 @@ if (config.node_env !=='development'){
   )
   transports.push(
     new winston.transports.File({filename:'error.log', level:'error'}),
-    new winston.transports.File({filename:'warn.log', level:'warn'}),
     new winston.transports.File({filename:'combined.log'})
   )
 } else {

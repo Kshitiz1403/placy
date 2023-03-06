@@ -2,10 +2,8 @@ import { FlatList, View, Platform, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars'
 import PostItem from './PostItem'
-import Community from '../../screens/Community'
-import feedData from '../../dummy-data/feedData'
 
-const Feed = ({ navigation, isCommunityFeed }) => {
+const Feed = ({ feedData, navigation }) => {
 
     const [imageZoomStatus, setImageZoomStatus] = useState({ id: '', isOpen: false })
 
@@ -25,7 +23,6 @@ const Feed = ({ navigation, isCommunityFeed }) => {
         <View style={{ flex: 1 }}>
             {Platform.OS == 'web' ?
                 <Scrollbars>
-                    {isCommunityFeed && <Community />}
                     <Posts />
                 </Scrollbars> :
                 <Posts />

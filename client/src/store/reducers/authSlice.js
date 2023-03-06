@@ -14,8 +14,7 @@ export const authSlice = createSlice({
             state.isLoggedIn = true
             state.isLoading = false;
             const token = action.payload;
-            // state.token = token
-            state.token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2QyODY0NGE1MGM4NWUyZjQ5OGQwZGIiLCJ1c2VybmFtZSI6InBzcGlhZ2ljdyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE4MTYyMzkwMjJ9.Dt9mEbL6DJkd2OyyEzNQ8VOsGOIvMLR8UZt8VwLjTqg"
+            state.token = token
             AsyncStorage.setItem('@token', token)
         },
         logoutUser: (state) => {

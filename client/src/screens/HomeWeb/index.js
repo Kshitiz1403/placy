@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import Discover from "../Discover";
 import LeftSidebar from "./LeftSidebar";
+import MainFeed from "./MainFeed";
 import RightSidebar from "./RightSidebar";
 
 const Home = ({ navigation }) => {
@@ -11,9 +11,9 @@ const Home = ({ navigation }) => {
                 <LeftSidebar navigation={navigation} />
             </View>
             <View style={{ flex: 0.55, paddingHorizontal: 20, paddingTop: 10, backgroundColor: '#ebecf3', }}>
-                <Discover navigation={navigation} isCommunityFeed={false} />
+                <MainFeed navigation={navigation}/>
             </View>
-            <View style={{ flex: 0.25, padding: 20, paddingTop: 10, }}>
+            <View style={{ flex: 0.25, padding: 20, paddingTop: 10 , }}>
                 <RightSidebar />
             </View>
         </View>
