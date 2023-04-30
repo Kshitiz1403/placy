@@ -85,7 +85,7 @@ export class CommunityController {
     try {
       const userId = req.currentUser.userId;
       const communityId = req.params.communityId as unknown as ICommunity['_id'];
-      const pageNumber = +req.query.page || 0 as unknown as number;
+      const pageNumber = +req.query.page as unknown as number;
       const posts = await this.communityServiceInstance.getCommunityPaginated(userId, communityId, pageNumber);
       return res.status(200).json(Result.success(posts));
     } catch (error) {
